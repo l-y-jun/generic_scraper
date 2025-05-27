@@ -21,12 +21,16 @@ _PAGE_SIZES = [ # items per page
 ] 
 
 @BrowserLoadWaitWrapper
-def getPage(driver, url):
+def newPage(driver, url):
     driver.get(url)
     driver.implicitly_wait(3)
     time.sleep(4)
 
+def navigatePage(drviver, page_from, page_to):
+    print(f"move page from {page_from} to {page_to}...")
+
 def scrapItems(driver):
+    print(f"scrapPage")
     return []
 
 def createUrl(keyword, sort_option = "latestAsc", page_size = 72):
@@ -39,7 +43,8 @@ def createUrl(keyword, sort_option = "latestAsc", page_size = 72):
     url_tokens = [_BASEURL, f"{_URLTypes["search"]}?q={keyword}&listSize={page_size}&sorter={sort_option}&page="]
     return ("/".join(url_tokens))
 
-
+def setUrl(base_url, page_number):
+    return (f"{base_url}{page_number}")
 
 """
 def test_fails(driver):
