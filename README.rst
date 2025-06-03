@@ -7,11 +7,26 @@ HOWTO
 TODO
 ----
 
-   - Scrap from browser
+   - Scraped items save to CSV file output
 
 LOGS
 ----
 
+4. #5/scrape items with BS4
+   :commit c430df659f2230b96b12fadd4961b5ddd9ccc0fb
+   :Date:   Tue Jun 3 19:05:34 2025 +0900
+
+   -Feats
+
+      - ``scrape.scrape_items``\: scrape items with BS4 internally uses ``_scrape_item`` per items
+
+         - ``scrape._scrape_item``\: scrape item info with BS4
+
+            - optional content
+
+               - rating
+               - review
+         
 3. #4/Navigate with each page
    :commit: 2bc318918311b8887f256256d6674fd69ad0dbfb
    :Date:   Tue Jun 3 17:32:38 2025 +0900
@@ -42,4 +57,5 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
+
 

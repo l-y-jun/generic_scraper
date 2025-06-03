@@ -11,7 +11,7 @@ def find_by_tagname(driver, tagname, many = False):
 def find_by_linktext(driver, text, many = False):
     return driver.find_elements(By.LINK_TEXT, text) if many else driver.find_element(By.LINK_TEXT, text)
 
-def _scrapItem(el, selector_data):
+def _scrapeItem(el, selector_data):
     product_info = {
             "image": el.select_one(selector_data["image"])["src"],
             "name" : el.select_one(selector_data["name"]).text,
@@ -29,16 +29,16 @@ def _scrapItem(el, selector_data):
 
     return product_info
 
-def scrapItems(driver, selector_data):
+def scrapeItems(driver, selector_data):
     html = BS(driver.page_source, "html.parser")
     selector = selector_data["items"]
     items = html.select(selector)
     for i, item in enumerate(items):
         try:
-            items[i] = _scrapItem(item, selector_data["item"])
+            items[i] = _scrapeItem(item, selector_data["item"])
         except Exception as e:
             items[i] = None
-            print(f"Scrap Error at {i}!!!")
+            print(f"scrape Error at {i}!!!")
             print(item)
 
     return (items)

@@ -1,5 +1,5 @@
 from config import _BASEURL, BrowserLoadWaitWrapper, _raiseErrorMsg, _NEXT_BUTTON_SELECTOR 
-from scrap import find_by_selector, find_by_tagname, find_by_linktext
+from scrape import find_by_selector, find_by_tagname, find_by_linktext
 from  selenium.webdriver.common.action_chains import ActionChains
 import time
 
@@ -46,7 +46,7 @@ def click(driver, el):
     time.sleep(4)
     #.pause(1)\
     
-def scrapItems(driver):
-    print(f"scrapPage")
+def scrapeItems(driver):
+    print(f"scrapePage")
     return []
 
