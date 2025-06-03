@@ -13,6 +13,11 @@ TODO
 LOGS
 ----
 
+2. #3/Navigation method button to href
+   :commit: 1549908c0f50754506cf3fa1b2b6036490b981d9
+   :Date:   Tue Jun 3 14:31:20 2025 +0900
+
+
 1. #1/Navigate Each page by GET
 
    :commit: a777148e82cb31deed59a815f2e8a872151656a9
