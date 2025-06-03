@@ -1,22 +1,28 @@
 from config import getDriver
-from search import getPage, scrapItems, navigateNextPage
+from search import getPage, navigateNextPage
+from scrap import scrapItems
 from urls import createURL
+import json
 
 def searchList(domain, page_from, page_to, browser = "Chrome", options = {}):
     driver = getDriver(browser)
     items = []
+    json_data = None
     if not validate_options(domain, page_from, page_to, options):
         return ([])
 
-    for i in range(page_from, page_to):
+    with open("domains.json", "r") as f:
+        json_data = json.load(f)
+
+    for i in range(page_from, page_to + 1):
         options["page"] = i
-        url = createURL(domain, options = options)
+        url = createURL(domain, json_data, options = options)
         print(url)
         with driver() as drv:
             try:
                 print(f"START TO SCRAP PAGE {i}")
                 if getPage(drv, url):
-                    items.append(scrapItems(drv))
+                    items.append(scrapItems(drv, json_data[domain]["selectorInfo"]))
                 else:
                     print("FAIL TO LOAD PAGE {i}")
                     return(items)
@@ -41,7 +47,7 @@ def validate_options(domain, page_from, page_to, options = {}):
 if __name__ == "__main__":
     keyword = "pencil"
     page_from = 1
-    page_to = 5
+    page_to = 1
     options = {
         "keyword": keyword,
         "sorter":"latestAsc",
@@ -49,4 +55,3 @@ if __name__ == "__main__":
     }
 
     items = searchList("coupang", page_from, page_to, browser="Firefox", options = options)
-

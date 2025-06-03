@@ -1,6 +1,5 @@
 from config import  _raiseErrorMsg
 from urllib import parse
-import json
 
 def _createQuery(query_options, options):
     urls = []
@@ -18,21 +17,18 @@ def _createQuery(query_options, options):
 
     return "&".join(urls)
 
-def createURL(domain, options = {}):
+def createURL(domain, data, options = {}):
     urls = []
+    avail_domains = data.keys()
+    if domain not in avail_domains:
+        _raiseErrorMsg("domain", domain)
 
-    with open("domains.json", "r") as f:
-        data = json.load(f)
-        avail_domains = data.keys()
-        if domain not in avail_domains:
-            _raiseErrorMsg("domain", domain)
+    domain_options = data[domain]
+    if options and options.get("keyword", None):
+        urls.append(f'{domain_options["url"]}?')
+    else:
+        _raiseErrorMsg("query option", options["keyword"])
 
-        domain_options = data[domain]
-        if options and options.get("keyword", None):
-            urls.append(f'{domain_options["url"]}?')
-        else:
-            _raiseErrorMsg("query option", options["keyword"])
-
-        urls.append(_createQuery(domain_options["query"], options))
+    urls.append(_createQuery(domain_options["query"], options))
 
     return ("".join(urls))

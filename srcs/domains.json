@@ -21,6 +21,16 @@
 					60
 				]
 			}
+		},
+		"selectorInfo": {
+			"items": "li.search-product",
+			"item" : {
+				"image": "img.search-product-wrap-img",
+				"name": "div.descriptions-inner > div.name",
+				"price": "strong.price-value",
+				"rating": "div.other-info > div.rating-star > span.star > em.rating",
+				"reviews": "div.other-info > div.rating-star > span.rating-total-count"
+			}
 		}
 	}
 }
