@@ -2,32 +2,51 @@ from config import getDriver
 from search import getPage, scrapItems, navigateNextPage
 from urls import createURL
 
-def searchList(url, page_from, page_to, browser = "Chrome"):
+def searchList(domain, page_from, page_to, browser = "Chrome", options = {}):
     driver = getDriver(browser)
-    pages = page_to - page_from
+    items = []
+    if not validate_options(domain, page_from, page_to, options):
+        return ([])
 
-    with driver() as drv:
-        print("DRIVER STARTED, wait 8s for bootstrap...")
-        for i in range(pages):
-            if getPage(drv, url):
-                print("SUCCESS TO LOAD PAGE")
-                items = scrapItems(drv)
-                url = navigateNextPage(drv)
-                if not url:
-                    return (False)
-            else:
-                print("FAIL TO LOAD PAGE")
+    for i in range(page_from, page_to):
+        options["page"] = i
+        url = createURL(domain, options = options)
+        print(url)
+        with driver() as drv:
+            try:
+                print(f"START TO SCRAP PAGE {i}")
+                if getPage(drv, url):
+                    items.append(scrapItems(drv))
+                else:
+                    print("FAIL TO LOAD PAGE {i}")
+                    return(items)
+            except Exception as e:
+                print(f"Uncaught Error, '{e}'. ends at {i} page.")
+                return (items)
+            print(f"END TO SCRAP PAGE {i}.")
+    print("FINISHED TO SCRAP PAGES")
+    return (items)
 
-    print("END.")
+def validate_options(domain, page_from, page_to, options = {}):
+    if page_from > page_to:
+        return (False)
+
+    if domain == "coupang":
+        if not options.get("keyword", None):
+            return (False)
+
     return (True)
+
 
 if __name__ == "__main__":
     keyword = "pencil"
     page_from = 1
     page_to = 5
+    options = {
+        "keyword": keyword,
+        "sorter":"latestAsc",
+        "listSize": None
+    }
 
-    url = createURL("coupang", {"keyword": "pencil", "sorter":"latestAsc", "listSize": None, "page": page_from})
-    print(url)
-
-    searchList(url, page_from, page_to, browser="Firefox")
+    items = searchList("coupang", page_from, page_to, browser="Firefox", options = options)
 

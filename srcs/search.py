@@ -6,8 +6,9 @@ import time
 _MAX_RETRIES = 5
 
 def _loadWait(driver):
-    driver.implicitly_wait(3)
-    time.sleep(4)
+    time.sleep(1.5)
+    driver.implicitly_wait(4)
+    time.sleep(1.5)
 
 def _isLoaded(driver):
     el = find_by_tagname(driver, "footer")
@@ -19,7 +20,7 @@ def getPage(driver, url, retries = _MAX_RETRIES):
         _loadWait(driver)
         if _isLoaded(driver):
             return True 
-        print(f"Page Load retry for {i + 1} times...MAX {retries} retries")
+        print(f"Page Load retry for {i + 1} time(~{retries} retries)")
     return False
 
 def navigateNextPage(driver, retries = _MAX_RETRIES):
