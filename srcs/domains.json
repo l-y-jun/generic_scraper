@@ -1,0 +1,27 @@
+{
+	"coupang": {
+		"url": "https://www.coupang.com/np/search",
+		"query": {
+			"keyword": "q",
+			"page": "page",
+			"sorter": {
+				"values": [
+					"scoreDesc",
+					"latestAsc", 
+					"salePriceAsc",
+					"salePriceDesc",
+					"saleCountDesc"
+				]
+			},
+			"listSize": {
+				"values": [
+					36,
+					48,
+					60,
+					72
+				]
+			}
+		}
+	}
+}
+

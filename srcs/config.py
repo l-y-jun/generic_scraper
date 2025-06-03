@@ -9,6 +9,9 @@ _BROWSERS = {
 _BASEURL = "https://www.coupang.com/np"
 _GENERAL_WAITTIME = 6
 
+_CUR_BUTTON_SELECTED_SELECTOR = ".Pagination_selected__r1eiC"
+_NEXT_BUTTON_SELECTOR  = ".Pagination_nextBtn__TUY5t"
+
 def _raiseErrorMsg(domain, value):
     raise ValueError(f"E: On {domain}, {value} is not Supported")
 
