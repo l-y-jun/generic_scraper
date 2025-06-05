@@ -7,16 +7,34 @@ HOWTO
 TODO
 ----
 
-   - Scraped items save to CSV file output
+   - fix browsing stability.
+   - organize function syntax clear.
 
 LOGS
 ----
+
+5. #6/Export to csv file
+   :commit: 25cfef321865f81ae2b86e8815bd361e7c14c244
+   :Date:   Thu Jun 5 14:40:44 2025 +0900
+
+   - Feats
+
+      - ``export.py``\: export scraped items to csv file.
+
+         - ``export.export_to_file``
+
+            - filename to save can be managed with parameter
+            - internally use ``to_csv`` function to convert items to csv data
+
+         - ``export.to_csv``
+         
+            - make item list to csv rows string
 
 4. #5/scrape items with BS4
    :commit c430df659f2230b96b12fadd4961b5ddd9ccc0fb
    :Date:   Tue Jun 3 19:05:34 2025 +0900
 
-   -Feats
+   - Feats
 
       - ``scrape.scrape_items``\: scrape items with BS4 internally uses ``_scrape_item`` per items
 
@@ -57,5 +75,6 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
+
 
 

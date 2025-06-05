@@ -1,7 +1,7 @@
 import time
 
 def export_to_file(domain, keyword, items, filename=None):
-    to_csv = write_as_csv(items)
+    to_csv = to_csv(items)
     if not filename:
         t = time.localtime()
         filename = f"{domain}_{keyword}_{t.tm_hour}-{t.tm_min}-{t.tm_sec}.csv"
@@ -15,7 +15,7 @@ def export_to_file(domain, keyword, items, filename=None):
         return 0;
     print(f"DONE WRITING FILE {filename}")
         
-def write_as_csv(items):
+def to_csv(items):
     ret = []
     for item in items:
         try:
