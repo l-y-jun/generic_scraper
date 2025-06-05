@@ -15,15 +15,20 @@ def _scrapeItem(el, selector_data):
     product_info = {
             "image": el.select_one(selector_data["image"])["src"],
             "name" : el.select_one(selector_data["name"]).text,
-            "price" : el.select_one(selector_data["price"]).text
+            "price" : el.select_one(selector_data["price"]).text,
+            "rating": None,
+            "reviews": None
     }
     try:
-        product_info["rating"] = el.select_one(selector_data["rating"]).text,
+        rating = el.select_one(selector_data["rating"]).text
+        product_info["rating"] = rating.split("'")[1]
+        
     except:
         product_info["rating"] = None
 
     try:
-        product_info["reviews"] = el.select_one(selector_data["price"]).text,
+        reviews = el.select_one(selector_data["reviews"]).text
+        product_info["reviews"] = reveiws.split("'")[1]
     except:
         product_info["reviews"] = None
 
@@ -41,5 +46,5 @@ def scrapeItems(driver, selector_data):
             print(f"scrape Error at {i}!!!")
             print(item)
 
-    return (items)
+    return [item for item in filter(lambda el: True if el is not None else False, items)]
 
