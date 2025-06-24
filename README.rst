@@ -12,6 +12,16 @@ TODO
 LOGS
 ----
 
+- #8/Search with Browser Stabilization
+
+   :commit: fb5b8fcd478af79d272fd6fcf943905960adc33e
+   :Date:   Tue Jun 24 17:58:41 2025 +0900
+
+   - Feats
+
+      - Now wating and closing the browser became clearer.
+      - After #7 urls REBUILD, browser locate page and wait, for load and close.
+
 - #7 ~ 7.1/Rebuild URL making Structure
 
    :commit: a675b85494cebe86fe23c5dbb9d3145d51201d65
@@ -107,5 +117,4 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
-
 
