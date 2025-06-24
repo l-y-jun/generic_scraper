@@ -7,7 +7,23 @@ HOWTO
 TODO
 ----
 
-   - clear
+   - #TODO 1: Failed Page Handling.
+
+      - From 1~3 Navigating, if page 2 Fails?
+
+         - Retry
+
+            - Quit browser and Retry
+            - Retry After End
+
+         - Notify
+
+   - #TODO 2: Duplicate Page Located Handling
+
+      1. First page got page 3
+      #. Second page got page 3(no more page)
+
+         - should Stop
 
 LOGS
 ----
