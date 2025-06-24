@@ -4,7 +4,7 @@ from scrape import scrapeItems
 from urls import createURLs, getJsonData
 from export import export_to_file
 
-def searchList(domain, page_to = 1, browser = "Chrome", main_queries = [], opt_queries = {}):
+def getItemList(domain, page_to = 1, browser = "Chrome", main_queries = [], opt_queries = {}):
     driver = getDriver(browser);
     items = [];
     domain_data = getJsonData(domain);
@@ -47,6 +47,6 @@ if __name__ == "__main__":
     opt_queries = {}
 
     # 7. get items list
-    items = searchList(domain, page_to, "Firefox", main_queries, opt_queries)
+    items = getItemList(domain, page_to, "Firefox", main_queries, opt_queries)
     # 8. export item list to csv
     export_to_file(domain, keyword, items)
