@@ -12,6 +12,17 @@ TODO
 LOGS
 ----
 
+ - #9/scarpe.py/Scrape Item Fixed to work properly
+
+   :commit: c1e54cfaa5ad0ab96b6a4ac4791ab55167ecd5db
+   :Date:   Tue Jun 24 18:03:36 2025 +0900
+
+   - Feats
+
+      - according to Coupang item selector changed, also changed attribute of element.
+      - now Safe string of price ("12,345Won" -> 12345)
+      - Still ``None`` on empty data(mainly on review count, rating)
+
 - #8/Search with Browser Stabilization
 
    :commit: fb5b8fcd478af79d272fd6fcf943905960adc33e
@@ -117,4 +128,5 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
+
 
