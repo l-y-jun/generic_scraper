@@ -2,7 +2,7 @@ from config import  _raiseErrorMsg
 from urllib import parse
 import json
 
-def createURLs(domain, page_to, main_q = [], opt_q = {}):
+def createURLs(domain, page_to, main_q = [], opt_q = {}, domain_data = None):
     """Create List of URLS to Scrap.
 
     - Errors:
@@ -17,15 +17,17 @@ def createURLs(domain, page_to, main_q = [], opt_q = {}):
     urls = [];
 
     # Validate Input data
-    domain_options = getJsonData(domain);
-    main_queries = domain_options["main_queries"];
+    if not domain_data:
+        domain_data = getJsonData(domain);
+
+    main_queries = domain_data["main_queries"];
     validateQueries(main_queries, main_q);
 
     # Create Single URL
-    urls.append("?".join((domain_options["url"], createQueryStr(main_q))));
+    urls.append("?".join((domain_data["url"], createQueryStr(main_q))));
 
     # Create Page Variations
-    page_key = domain_options["page_key"];
+    page_key = domain_data["page_key"];
     page_from = int(getPageNumber(urls[0], page_key));
     while page_from < page_to:
         page_from += 1;
