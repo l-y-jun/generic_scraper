@@ -1,28 +1,36 @@
-from config import _BASEURL, BrowserLoadWaitWrapper, _raiseErrorMsg, _NEXT_BUTTON_SELECTOR 
-from scrape import find_by_selector, find_by_tagname, find_by_linktext
-from  selenium.webdriver.common.action_chains import ActionChains
+from config import BrowserLoadWaitWrapper, _raiseErrorMsg
+from scrape import find_by_tagname
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 import time
 
-_MAX_RETRIES = 5
+_MAX_RETRIES = 3
 
 def _loadWait(driver):
-    time.sleep(1.5)
-    driver.implicitly_wait(4)
-    time.sleep(1.5)
+    time.sleep(1)
+    driver.implicitly_wait(3)
+    time.sleep(1)
 
 def _isLoaded(driver):
-    el = find_by_tagname(driver, "footer")
-    return True if el else False
+    try: 
+        footer = find_by_tagname(driver, "footer")
+        wait = WebDriverWait(driver, timeout=3)
+        wait.until(lambda _ : footer.is_displayed())
+    except NoSuchElementException:
+        return False
+    return True if footer else False
 
 def getPage(driver, url, retries = _MAX_RETRIES):
     driver.get(url)
-    for i in range(retries):
-        _loadWait(driver)
+    _loadWait(driver)
+    for _ in range(retries):
         if _isLoaded(driver):
-            return True 
-        print(f"Page Load retry for {i + 1} time(~{retries} retries)")
-    return False
+            return True
+    return _isLoaded(driver)
 
+"""
+from scrape import find_by_selector, find_by_linktext
 def navigateNextPage(driver, retries = _MAX_RETRIES):
     #el = find_by_selector(driver, ".btn-next > span")
     el = find_by_linktext(driver, "다음")
@@ -49,4 +57,4 @@ def click(driver, el):
 def scrapeItems(driver):
     print(f"scrapePage")
     return []
-
+"""
