@@ -1,65 +1,49 @@
 from config import getDriver
-from search import getPage, navigateNextPage
+from search import getPage
 from scrape import scrapeItems
-from urls import createURL
+from urls import createURLs, getJsonData
 from export import export_to_file
-import json
 
-def searchList(domain, page_from, page_to, browser = "Chrome", options = {}):
-    driver = getDriver(browser)
-    items = []
-    json_data = None
-    if not validate_options(domain, page_from, page_to, options):
-        return ([])
+def searchList(domain, page_to = 1, browser = "Chrome", main_queries = [], opt_queries = {}):
+    driver = getDriver(browser);
+    items = [];
+    domain_data = getJsonData(domain);
 
-    with open("domains.json", "r") as f:
-        json_data = json.load(f)
-
-    with driver() as drv:
-        for i in range(page_from, page_to + 1):
-            options["page"] = i
-            url = createURL(domain, json_data, options = options)
-            print(url)
-            try:
-                print(f"START TO scrape PAGE {i}")
-                if getPage(drv, url):
-                    items = items + scrapeItems(drv, json_data[domain]["selectorInfo"])
-                else:
-                    print("FAIL TO LOAD PAGE {i}")
-                    drv.quit()
-                    return(items)
+    urls = createURLs(domain, page_to, main_queries, opt_queries, domain_data)
+    
+    i = 1;
+    for url in urls:
+        print(f"scrape {url}...")
+        with driver() as drv:
+            print(f"START TO scrape PAGE: {i} times")
+            ret = getPage(drv, url)
+            if ret is True:
+                print("HI", ret)
+                items = items + scrapeItems(drv, domain_data["selector"])
+            else:
+                print("FAIL TO LOAD PAGE: at {i} times")
+            """
             except Exception as e:
-                print(f"Uncaught Error, '{e}'. ends at {i} page.")
+                print(f"Uncaught Error, '{e}'. ends at {i} times.")
+                drv.close()
                 drv.quit()
-                return (items)
-            print(f"END TO scrape PAGE {i}.")
-            drv.close()
-        drv.quit()
+                return items;
+            """
+            print(f"END TO scrape PAGE: {i} times.")
+        i += 1
     print("FINISHED TO scrape PAGES")
     return (items)
 
-def validate_options(domain, page_from, page_to, options = {}):
-    if page_from > page_to:
-        return (False)
-
-    if domain == "coupang":
-        if not options.get("keyword", None):
-            return (False)
-
-    return (True)
-
-
 if __name__ == "__main__":
-    keyword = "pencil"
-    page_from = 1
-    page_to = 1
-    options = {
-        "keyword": keyword,
-        "sorter":"latestAsc",
-        "listSize": None
-    }
-
     domain = "coupang"
-    items = searchList(domain, page_from, page_to, browser="Firefox", options = options)
-    print("SAVE TO FILES")
+    keyword = "pencil"
+    page_to = 3
+    main_queries = [
+        {"name": "q", "value":"pencil"},
+        {"name": "listSize", "value": 60},
+        {"name": "sorter", "value":"latestAsc"},
+        {"name": "page", "value": 3},
+    ]
+    opt_queries = {}
+    items = searchList(domain, page_to, "Firefox", main_queries, opt_queries)
     export_to_file(domain, keyword, items)
