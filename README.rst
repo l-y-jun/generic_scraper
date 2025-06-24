@@ -12,6 +12,26 @@ TODO
 LOGS
 ----
 
+- #11/main.py/Usage Change becuase of changes from #7 to #10
+
+   :commit: eaa4cfd9df9022133023d7acddf78aaefd4cf670
+   :Date:   Tue Jun 24 18:14:45 2025 +0900
+
+      - get Urls from ``urls.createURLs`` function
+      - start and quit browser by URLs of above. 
+
+         1. Init Browser
+         #. Get JSON Data
+         #. Create URLs
+         #. For loop by URLs
+
+            #. get Page with URL
+            #. scrape Items
+            #. save to list
+            #. quit browser
+
+         #. save item list to csv file
+
 - #10/export.py/safe string on item name for csv
 
    :commit: 06b3bf52ac2a6bed159eb7c37c8d0e569a517a3b
@@ -140,6 +160,4 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
-
-
 
