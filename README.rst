@@ -44,7 +44,7 @@ LOGS
          - FROM: 'my item, super great thing' 
          - TO: '"my item, super great thing"' 
 
- - #9/scarpe.py/Scrape Item Fixed to work properly
+- #9/scarpe.py/Scrape Item Fixed to work properly
 
    :commit: c1e54cfaa5ad0ab96b6a4ac4791ab55167ecd5db
    :Date:   Tue Jun 24 18:03:36 2025 +0900
