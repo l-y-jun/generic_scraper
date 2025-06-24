@@ -60,7 +60,6 @@ def getJsonData(domain):
 
     return (json_data[domain]);
 
-
 def changePageNumber(url, page_key, page):
     page_at, page_end = getPageNumberIdx(url, page_key);
     return f"{url[:page_at]}{page}{url[page_end:]}";
