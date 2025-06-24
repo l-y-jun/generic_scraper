@@ -12,6 +12,18 @@ TODO
 LOGS
 ----
 
+- #10/export.py/safe string on item name for csv
+
+   :commit: 06b3bf52ac2a6bed159eb7c37c8d0e569a517a3b
+   :Date:   Tue Jun 24 18:10:11 2025 +0900
+
+   - Feats
+
+      - Safe string work for product name(add double quote mark on each side) to prevent comma seperate rule violations.
+
+         - FROM: 'my item, super great thing' 
+         - TO: '"my item, super great thing"' 
+
  - #9/scarpe.py/Scrape Item Fixed to work properly
 
    :commit: c1e54cfaa5ad0ab96b6a4ac4791ab55167ecd5db
@@ -128,5 +140,6 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
+
 
 
