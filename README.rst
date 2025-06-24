@@ -7,13 +7,45 @@ HOWTO
 TODO
 ----
 
-   - fix browsing stability.
-   - organize function syntax clear.
+   - clear
 
 LOGS
 ----
 
-5. #6/Export to csv file
+- #7 ~ 7.1/Rebuild URL making Structure
+
+   :commit: a675b85494cebe86fe23c5dbb9d3145d51201d65
+   :Date:   Tue Jun 24 14:45:13 2025 +0900
+
+   - Feats
+
+      - ``urls.py``\: now create URLs not only single page url
+
+         - Navigate Each page in discrete, individually.
+
+            1. create url via domain(coup), page_to(target), main_q(main query list), opt_q(optional query list)
+            #. make additional URLS base on main_q(page target) til page_to function parameter
+            #. returns list of urls to scrap
+
+         - according to this method change, Url functions added
+ 
+            - validateQueries(origin, queries): check whole length of queries
+
+               - validateQuery(origin, query): check each query followed the rules in domains.json(query name and value)
+
+            - changePageNumber(url, page_key, page): change number of page from url
+
+               - "page=23&", 4 -> "page=4&"
+
+            - getPageNumber(url, page_key): get pagenumber from URL string
+
+               - "page=23&" -> "23"
+
+            - getPageNumberIdx(url, page_key): locate the substring location range of page numbers
+
+               - "page=23&" -> (5, 7) from 5th to 7th
+
+- #6/Export to csv file
    :commit: 25cfef321865f81ae2b86e8815bd361e7c14c244
    :Date:   Thu Jun 5 14:40:44 2025 +0900
 
@@ -30,7 +62,7 @@ LOGS
          
             - make item list to csv rows string
 
-4. #5/scrape items with BS4
+- #5/scrape items with BS4
    :commit c430df659f2230b96b12fadd4961b5ddd9ccc0fb
    :Date:   Tue Jun 3 19:05:34 2025 +0900
 
@@ -45,7 +77,7 @@ LOGS
                - rating
                - review
          
-3. #4/Navigate with each page
+- #4/Navigate with each page
    :commit: 2bc318918311b8887f256256d6674fd69ad0dbfb
    :Date:   Tue Jun 3 17:32:38 2025 +0900
 
@@ -56,11 +88,11 @@ LOGS
 
       - default option of page size is set to maximum item count
 
-2. #3/Navigation method button to href
+- #3/Navigation method button to href
    :commit: 1549908c0f50754506cf3fa1b2b6036490b981d9
    :Date:   Tue Jun 3 14:31:20 2025 +0900
 
-1. #1/Navigate Each page by GET
+- #1/Navigate Each page by GET
    :commit: a777148e82cb31deed59a815f2e8a872151656a9
    :Date:   Sat May 24 12:19:08 2025 +0900
 
@@ -75,6 +107,5 @@ LOGS
          - Navigation method should change location based to UI interaction based.
 
       - search page range(availability) should be considered.
-
 
 
