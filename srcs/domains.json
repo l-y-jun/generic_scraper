@@ -1,28 +1,43 @@
 {
 	"coupang": {
 		"url": "https://www.coupang.com/np/search",
-		"query": {
-			"keyword": "q",
-			"page": "page",
-			"sorter": {
+		"page_key": "page",
+		"main_queries": [
+			{
+				"name": "q",
+				"desc": "search keyword",
+				"required": ["name", "value"]
+			},
+			{
+				"name": "listSize",
+				"desc": "item count per page",
+				"values": [
+					72,
+					36,
+					48,
+					60
+				],
+				"required": ["name", "value"]
+			},
+			{
+				"name": "sorter",
+				"desc": "order by method",
 				"values": [
 					"scoreDesc",
 					"latestAsc", 
 					"salePriceAsc",
 					"salePriceDesc",
 					"saleCountDesc"
-				]
+				],
+				"required": ["name", "value"]
 			},
-			"listSize": {
-				"values": [
-					72,
-					36,
-					48,
-					60
-				]
+			{
+				"name": "page",
+				"desc": "page number",
+				"required": ["name", "value"]
 			}
-		},
-		"selectorInfo": {
+		],
+		"selector": {
 			"items": "li.search-product",
 			"item" : {
 				"image": "img.search-product-wrap-img",
