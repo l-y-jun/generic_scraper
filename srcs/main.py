@@ -25,19 +25,28 @@ def searchList(domain, page_to = 1, browser = "Chrome", main_queries = [], opt_q
     return (items)
 
 if __name__ == "__main__":
-    # domain Should be in domains.json
+    # 1. set domain
+    ## domain Should be in domains.json
     domain = "coupang"
-    # Set page of the End
+    # 2. set the keyword to Search
+    keyword = "pencil"
+    # 3. set Page start
+    page_from = 3
+    # 4. set Page end
     page_to = 4
 
-    # Order Should be follwed as in domains.json
+    # 5. Set QueryOptions
+    ## Order of list Should be follow as in domains.json
     main_queries = [ 
-        {"name": "q", "value":"pencil"}, # Search Item
+        {"name": "q", "value": keyword}, # Search Item
         {"name": "listSize", "value": 60}, # Items Count
         {"name": "sorter", "value":"latestAsc"}, # Items Order
-        {"name": "page", "value": 3}, # Page Start
+        {"name": "page", "value": page_from}, # Page Start
     ]
+    # 6. future release feature
     opt_queries = {}
 
+    # 7. get items list
     items = searchList(domain, page_to, "Firefox", main_queries, opt_queries)
+    # 8. export item list to csv
     export_to_file(domain, keyword, items)
