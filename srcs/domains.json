@@ -38,13 +38,13 @@
 			}
 		],
 		"selector": {
-			"items": "li.search-product",
+			"items": ["li.search-product", "ul#product-list > li"],
 			"item" : {
-				"image": "img.search-product-wrap-img",
-				"name": "div.descriptions-inner > div.name",
-				"price": "strong.price-value",
-				"rating": "div.other-info > div.rating-star > span.star > em.rating",
-				"reviews": "div.other-info > div.rating-star > span.rating-total-count"
+				"image": "img",
+				"name": "img",
+				"price": "strong",
+				"rating": "a:nth-child(1) > div:nth-child(2) > div:nth-child(5) > span:nth-child(1) > div:nth-child(1)",
+				"reviews":"a:nth-child(1) > div:nth-child(2) > div:nth-child(5) > span:nth-child(2)"
 			}
 		}
 	}
